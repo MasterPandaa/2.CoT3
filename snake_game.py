@@ -1,11 +1,12 @@
-import pygame
 import random
 import sys
 
+import pygame
+
 # ========== Konfigurasi Dasar ==========
-WIDTH, HEIGHT = 600, 400        # Pastikan kelipatan BLOCK_SIZE
-BLOCK_SIZE = 20                 # Ukuran satu grid
-SPEED = 10                      # FPS awal (kecepatan permainan)
+WIDTH, HEIGHT = 600, 400  # Pastikan kelipatan BLOCK_SIZE
+BLOCK_SIZE = 20  # Ukuran satu grid
+SPEED = 10  # FPS awal (kecepatan permainan)
 
 # Warna (R, G, B)
 BLACK = (0, 0, 0)
@@ -16,6 +17,7 @@ RED = (220, 0, 0)
 GRAY = (40, 40, 40)
 YELLOW = (240, 220, 0)
 
+
 # ========== Utility ==========
 def draw_grid(surface):
     # Garis grid opsional untuk membantu visual
@@ -23,6 +25,7 @@ def draw_grid(surface):
         pygame.draw.line(surface, GRAY, (x, 0), (x, HEIGHT))
     for y in range(0, HEIGHT, BLOCK_SIZE):
         pygame.draw.line(surface, GRAY, (0, y), (WIDTH, y))
+
 
 def random_food_position(snake_body):
     # Pilih posisi acak yang tidak menabrak tubuh ular
@@ -33,11 +36,13 @@ def random_food_position(snake_body):
         if (x, y) not in snake_body:
             return (x, y)
 
+
 def render_text(surface, text, size, color, center):
     font = pygame.font.SysFont(None, size, bold=True)
     r = font.render(text, True, color)
     rect = r.get_rect(center=center)
     surface.blit(r, rect)
+
 
 # ========== Game Loop ==========
 def main():
@@ -179,14 +184,23 @@ def main():
             overlay.fill((0, 0, 0, 160))
             screen.blit(overlay, (0, 0))
             render_text(screen, "GAME OVER", 56, WHITE, (WIDTH // 2, HEIGHT // 2 - 30))
-            render_text(screen, "Press R/Space to Restart", 28, WHITE, (WIDTH // 2, HEIGHT // 2 + 10))
-            render_text(screen, "Press Q/Esc to Quit", 22, WHITE, (WIDTH // 2, HEIGHT // 2 + 40))
+            render_text(
+                screen,
+                "Press R/Space to Restart",
+                28,
+                WHITE,
+                (WIDTH // 2, HEIGHT // 2 + 10),
+            )
+            render_text(
+                screen, "Press Q/Esc to Quit", 22, WHITE, (WIDTH // 2, HEIGHT // 2 + 40)
+            )
 
         pygame.display.flip()
         clock.tick(speed)
 
     pygame.quit()
     sys.exit()
+
 
 if __name__ == "__main__":
     main()
